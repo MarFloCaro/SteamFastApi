@@ -37,8 +37,10 @@ def root():
 
 @app.get('/genero/{year}')
 def genero(year:str): 
-    """ Se ingresa un año y devuelve una diccionario con los 5 géneros
-    más vendidos en el orden correspondiente."""
+    """ Se ingresa un año en números enteros y devuelve una diccionario con los 5 géneros con más lanzamientos en ese año,
+    en formato género: cantidad, en orden descendente por cantidad. En caso de no haber datos suficientes, retorna un mensaje de error.
+    
+    Ejemplo de retorno: {"Simulation":2,"Strategy":2,"Adventure":2,"Action":1,"Indie":1} """
 
     # Validamos que sea entero
     if not validar_entero(year):
@@ -78,7 +80,10 @@ def genero(year:str):
 
 @app.get('/juegos/{year}')
 def juegos(year:str):
-    """Se ingresa un año y devuelve un diccionario con los juegos lanzados en el año."""
+    """Se ingresa un año en números enteros y devuelve un diccionario con los juegos lanzados en el año, usando el año como key
+    y una lista con los nombres de los juegos como valor. En caso de no haber datos suficientes, retorna un mensaje de error.
+    
+    Ejemplo de retorno: {"1981":["Gallagher: Two Real","The Mystery of the Uurnog","Gallagher: Mad As Hell"]} """
 
     if not validar_entero(year):
         return {"error" : f"{year} no es un número entero válido"}
@@ -91,16 +96,22 @@ def juegos(year:str):
     # Filtramos sólo las filas que corresponden al año
     juegos_df = df[df['release_date'].dt.year == year]
 
-    # Construimos el diccionario
-    juegos_dict = {number + 1: name for number, name in enumerate(juegos_df['app_name'])}
+    # Listamos los juegos del año
+    juegos_lista = juegos_df['app_name'].dropna().to_list()
+
+    # Construímos el diccionario
+    juegos_dict = {year: juegos_lista}
 
     # Retornamos el diccionario (o un error, si no hay lanzamientos registrados)
-    return {"error": f"No se encontraron lanzamientos para el año {year}"} if not juegos_dict else juegos_dict
+    return {"error": f"No se encontraron lanzamientos para el año {year}"} if not juegos_lista else juegos_dict
 
 
 @app.get('/specs/{year}')
 def specs(year:str):
-    """Se ingresa un año y devuelve un diccionario con los 5 specs que más se repiten en el mismo en el orden correspondiente."""
+    """Se ingresa un año en numeros entero y devuelve un diccionario con los 5 specs con más lanzamientos en ese año,
+    en formato spec: cantidad, en orden descendente por cantidad. En caso de no haber datos suficientes, retorna un mensaje de error.
+    
+    Ejemplo de retorno: {"Single-player":45,"Multi-player":13,"Steam Cloud":10,"Steam Trading Cards":7,"Captions available":7} """
 
     if not validar_entero(year):
         return {"error" : f"{year} no es un número entero válido"}
@@ -137,7 +148,10 @@ def specs(year:str):
 
 @app.get('/earlyaccess/{year}')
 def earlyaccess(year:str):
-    """ Cantidad de juegos lanzados en un año con early access. """
+    """ Se ingresa un año en números enteros y devuelve un diccionario con la cantidad juegos con early access lanzados en el año,
+    usando el año como key y la cantidad de juegos como valor. En caso de no haber datos suficientes, retorna un mensaje de error.
+    
+    Ejemplo de retorno: {"2015":224} """
 
     if not validar_entero(year):
         return {"error" : f"{year} no es un número entero válido"}
@@ -154,14 +168,16 @@ def earlyaccess(year:str):
     early_total = int(early_df['early_access'].sum())
 
     # Retornamos la cantidad de juegos en early access para el año, o un error si no hay datos para ese año
-    return {"cantidad": early_total} if early_total != 0 else {"error": f"No se encontraron datos de early access para el año {year}"}
+    return {year: early_total} if early_total != 0 else {"error": f"No se encontraron datos de early access para el año {year}"}
 
 
 
 @app.get('/sentiment/{year}')
 def sentiment(year:str): 
-    """ Según el año de lanzamiento, se devuelve una lista con la cantidad de registros que se encuentren categorizados con un análisis de sentimiento.
-        Ejemplo de retorno: {Mixed = 182, Very Positive = 120, Positive = 278} """
+    """ Se ingresa un año en numeros entero y devuelve un diccionario con la categroría de sentiment y la cantidad de registros para ese año,
+    en formato sentiment: cantidad. En caso de no haber datos suficientes, retorna un mensaje de error.
+    
+    Ejemplo de retorno: {Mixed = 182, Very Positive = 120, Positive = 278} """    
 
     if not validar_entero(year):
         return {"error" : f"{year} no es un número entero válido"}
@@ -195,7 +211,10 @@ def sentiment(year:str):
 
 @app.get('/metascore/{year}')    
 def metascore(year:str):
-    """ Top 5 juegos según año con mayor metascore. """
+    """Se ingresa un año en numeros entero y devuelve un diccionario con los 5 jeugos con mayor metascore en ese año,
+    en formato juego: metascore, en orden descendente por cantidad. En caso de no haber datos suficientes, retorna un mensaje de error.
+    
+    Ejemplo de retorno: {"BioShock Infinite":94.0,"Deus Ex: Human Revolution - Director's Cut":91.0,"FEZ":91.0,"Brothers - A Tale of Two Sons":90.0,"Spelunky":90.0} """
 
     if not validar_entero(year):
         return {"error" : f"{year} no es un número entero válido"}
@@ -225,3 +244,4 @@ def metascore(year:str):
 
     # Retornamos el diccionario limitado
     return top_5_dict
+
