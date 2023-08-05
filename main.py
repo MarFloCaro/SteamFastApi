@@ -343,9 +343,7 @@ def prediccion(
         preprocessing_steps = pickle.load(file)
 
     # Transformamos X con el pre procesamiento importado
-
-    X_feat = preprocessing_steps['poly'].transform([X])
-    X_scaled = preprocessing_steps['scaler'].transform(X_feat)
+    X_scaled = preprocessing_steps['scaler'].transform([X])
 
     # Abrimos el archivo con el modelo
     with open('trained_model.pkl', 'rb') as file:
