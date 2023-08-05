@@ -343,20 +343,21 @@ def prediccion(
         preprocessing_steps = pickle.load(file)
 
     # Transformamos X con el pre procesamiento importado
-    X_scaled = preprocessing_steps['scaler'].transform([X])
-    X_feat = preprocessing_steps['poly'].transform(X_scaled)
+
+    X_feat = preprocessing_steps['poly'].transform([X])
+    X_scaled = preprocessing_steps['scaler'].transform(X_feat)
 
     # Abrimos el archivo con el modelo
     with open('trained_model.pkl', 'rb') as file:
         loaded_model = pickle.load(file)
 
     # Calculamos la predicción
-    prediccion = loaded_model.predict(X_feat)
+    prediccion = loaded_model.predict(X_scaled)
 
     # Abrimos el archivo con el valor RMSE del modelo guardado
     with open('rmse_model.txt', 'r') as file:
         rmse_retrieved = file.read()
 
     # Retornamos la predicción y el RMSE del modelo
-    return {"prediccion_precio": f"{prediccion[0]}", "RMSE_modelo_Lineal_Polinomial": f"{round(float(rmse_retrieved), 2)}"}
+    return {"prediccion_precio": f"{round(prediccion[0], 2)}", "RMSE_modelo_Lineal_Polinomial": f"{round(float(rmse_retrieved), 2)}"}
 
