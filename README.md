@@ -99,22 +99,10 @@ Detalle completo en [experimentacion_entrenamiento.ipynb](/entregables/experimen
 + Guardamos el modelo elegido en un archivo de pickle.
     + Todos los modelos con base lineal tuvieron performances similares, por encima de los modelos no basados en el lineal. Por simplicidad del modelo, y un menor peso de archivo, elegimos el modelo clásico lineal.
 + Probamos los archivos.
-
-### Gráficos del Modelo elegido (Regresión Lineal)
-
-<p align="center">
-  <img src="src/LinealTest.png" alt="Predicción vs Real en Test" />
-</p>
+  
 <p align="center">
   <img src="src/LinealTrain.png" alt="Predicción vs Real en Train" />
 </p>
-<p align="center">
-  <img src="src/LinealResidualPlot.png" alt="Residual Plot" />
-</p>
-<p align="center">
-  <img src="src/LinealDistError.png" alt="Predicción vs Real en Train" />
-</p>
-
 
 
 ## Desarrollo de la aplicación de FAST API
