@@ -18,6 +18,22 @@ El desafío planteado en para este proyecto consiste en desarrollar un proceso d
 
 # <h1 align=center> **Desarrollo del Proyecto**</h1>
 
+## Ingeniería de Datos
+
+En el rol de Data Engineer, encaramos el proceso de ETL. El detalle del proceso puede ser encontrado en [etl.ipynb](/entregables/etl.ipynb), con comentarios en Markdown paso a paso, pero algunos de los pasos destacados son (en orden, aunque algunos pasos se repiten luego de su primera aparición):
+
++ Importación delibrerías y lectura del archivo original.
++ Conversión a dataframe de pandas, ejecución de info() para una primera observación general.
++ Observación el formato de los datos en el dataset, a la vez que observamos el diccionario de datos provisto
++ Observación de filas sin datos útiles (vacióo, datos inespecíficos, duplicados)
++ Eliminación de columnas que no van a ser usadas en aplicaciones posteriores, tales como ID
++ Conversión de los tipos de datos asignados por defecto a tipos adecuados
++ Exploración de columnas con similitudes y sustitución de datos ausentes usando las similitudes.
++ Eliminación de columnas redundantes (columnas que aportan datos casi idénticos)
++ Sustitución de valores string por valores float or NAN donde sea posible, y re-asignación de tipo de datos de la/s columnas que lo permitan
++ Reemplazo de valores sin relación con la columna donde se encuentran por NA
++ Reinicio el index y guardo el dataset como archivo de parquet (elegido por almacenar data types y su bajo peso de archivo comparado con alternativas .json y .csv) para posterior uso de la aplicación FAST API, para sus primeras 6 funciones
+
 # <h1 align=center> **Entregables**</h1>
 
 ## Aplicación de FAST API
