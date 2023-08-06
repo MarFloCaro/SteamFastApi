@@ -312,8 +312,11 @@ def prediccion(
     # Validamos cada género de la lista
     for genero in genre:
         if genero.lower().capitalize() not in column_dict:
-            return {"error" : f"{genre} no es una lista válida de géneros"}
+            if genero.upper() not in column_dict:
+                return {"error" : f"{genre} no es una lista válida de géneros"}
         # Si es encontrado, ponemos valor 1 en el diccionario
+            else:
+                column_dict[genero.upper()] = 1
         else:
             column_dict[genero.lower().capitalize()] = 1
     
