@@ -10,7 +10,11 @@
 
 ### Este primer proyecto individual nos hará recorrer el ciclo de Machine Learning Operations, partiendo de un dataset de juegos de la plataforma Steam, hasta llegar a un modelo de Machine Learning predictivo.
 <br>
-<p style="text-align: right; color: violet; font-size: 1.2em; font-weight: bold;">by Maria Florencia Caro, Cohorte 13</p><br>
+<div style="text-align: right; color: violet; font-size: 1.2em; font-weight: bold;">
+  <a href="https://github.com/MarFloCaro" style="color: violet; text-decoration: none;">
+    by Maria Florencia Caro, Cohorte 13
+  </a>
+</div>
 
 # <h1 align=center> **Intro** </h1>
 
