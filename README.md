@@ -170,7 +170,7 @@ def prediccion(
     de la misma manera que aparecen en Steam. Para el género ingresamos valores separados por comas. Retorna el precio predicho para el juego y el RMSE (Root Mean Squared Error)
     del modelo de Machine Learning usado.
 
-    Ejemplo de retorno: {"prediccion_precio": "21.41276006400585", "RMSE_Modelo_Lineal_Polinomial": "6.43"}
+    Ejemplo de retorno: {"prediccion_precio": "21.41276006400585", "RMSE_Modelo_Regresion_Lineal": "6.43"}
     """
 ```
 
