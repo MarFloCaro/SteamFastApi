@@ -15,7 +15,7 @@ df_model = pd.read_parquet('steam_data_model.parquet')
 # Funciones de validación
 
 def validar_fecha(release_date):
-    """ Validamos que la fecha del query sea en formato YYYY-MM-DD """
+    """ Valida que la fecha del query sea en formato YYYY-MM-DD """
 
     # Construímos la RegEx
     date_regex = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -32,7 +32,7 @@ def validar_fecha(release_date):
 
 
 def validar_entero(year):
-    """ Validamos que el año provisto sea entero """
+    """ Valida que el año provisto sea entero """
 
     try:
         return int(year)
@@ -41,7 +41,7 @@ def validar_entero(year):
     
 
 def validar_anio(year):    
-    """ Validamos que el año provisto esté dentro del dataset """
+    """ Valida que el año provisto esté dentro del dataset """
 
     min_year = int(df['release_date'].dt.year.min())
     max_year = int(df['release_date'].dt.year.max())
@@ -62,8 +62,9 @@ def root():
 
 @app.get('/genero/{year}')
 def genero(year:str): 
-    """ Se ingresa un año en números enteros y devuelve una diccionario con los 5 géneros con más lanzamientos en ese año,
-    en formato género: cantidad, en orden descendente por cantidad. En caso de no haber datos suficientes, retorna un mensaje de error.
+    """ Se ingresa un año en números enteros y devuelve una json con los 5 géneros con más lanzamientos en ese año,
+    en formato género: cantidad, en orden descendente por cantidad. En caso de no haber datos suficientes para al menos un género,
+    retorna un mensaje de error.
     
     Ejemplo de retorno: {"Simulation":2,"Strategy":2,"Adventure":2,"Action":1,"Indie":1}
     """
@@ -106,7 +107,7 @@ def genero(year:str):
 
 @app.get('/juegos/{year}')
 def juegos(year:str):
-    """ Se ingresa un año en números enteros y devuelve un diccionario con los juegos lanzados en el año, usando el año como key
+    """ Se ingresa un año en números enteros y devuelve un json con los juegos lanzados en el año, usando el año como key
     y una lista con los nombres de los juegos como valor. En caso de no haber datos suficientes, retorna un mensaje de error.
     
     Ejemplo de retorno: {"1981":["Gallagher: Two Real","The Mystery of the Uurnog","Gallagher: Mad As Hell"]}
@@ -135,8 +136,9 @@ def juegos(year:str):
 
 @app.get('/specs/{year}')
 def specs(year:str):
-    """ Se ingresa un año en numeros entero y devuelve un diccionario con los 5 specs con más lanzamientos en ese año,
-    en formato spec: cantidad, en orden descendente por cantidad. En caso de no haber datos suficientes, retorna un mensaje de error.
+    """ Se ingresa un año en numeros enteros y devuelve un json con los 5 specs con más lanzamientos en ese año,
+    en formato spec: cantidad, en orden descendente por cantidad. En caso de no haber datos suficientes para al menos
+    una spec, retorna un mensaje de error.
     
     Ejemplo de retorno: {"Single-player":45,"Multi-player":13,"Steam Cloud":10,"Steam Trading Cards":7,"Captions available":7}
     """
@@ -176,7 +178,7 @@ def specs(year:str):
 
 @app.get('/earlyaccess/{year}')
 def earlyaccess(year:str):
-    """ Se ingresa un año en números enteros y devuelve un diccionario con la cantidad juegos con early access lanzados en el año,
+    """ Se ingresa un año en números enteros y devuelve un json con la cantidad juegos con early access lanzados en el año,
     usando el año como key y la cantidad de juegos como valor. En caso de no haber datos suficientes, retorna un mensaje de error.
     
     Ejemplo de retorno: {"2015":224}
@@ -203,11 +205,11 @@ def earlyaccess(year:str):
 
 @app.get('/sentiment/{year}')
 def sentiment(year:str): 
-    """ Se ingresa un año en numeros entero y devuelve un diccionario con la categroría de sentiment y la cantidad de registros para ese año,
-    en formato sentiment: cantidad. En caso de no haber datos suficientes, retorna un mensaje de error.
+    """ Se ingresa un año en numeros enteros y devuelve un json con la categroría de sentiment y la cantidad de registros para ese año,
+    en formato sentiment: cantidad. En caso de no haber datos suficientes para al menos un sentiment, retorna un mensaje de error.
     
-    Ejemplo de retorno: {Mixed = 182, Very Positive = 120, Positive = 278}
-    """    
+    Ejemplo de retorno: {"Mixed": 182,"Very Positive": 120,"Positive": 278}
+    """  
 
     if not validar_entero(year):
         return {"error" : f"{year} no es un número entero válido"}
@@ -238,8 +240,9 @@ def sentiment(year:str):
 
 @app.get('/metascore/{year}')    
 def metascore(year:str):
-    """ Se ingresa un año en numeros entero y devuelve un diccionario con los 5 juegos con mayor metascore en ese año,
-    en formato juego: metascore, en orden descendente por cantidad. En caso de no haber datos suficientes, retorna un mensaje de error.
+    """ Se ingresa un año en numeros entero y devuelve un json con los 5 juegos con mayor metascore en ese año,
+    en formato juego: metascore, en orden descendente por cantidad. En caso de no haber datos suficientes
+    para al menos un metascore, retorna un mensaje de error.
     
     Ejemplo de retorno: {"BioShock Infinite":94.0,"Deus Ex: Human Revolution - Director's Cut":91.0,"FEZ":91.0,"Brothers - A Tale of Two Sons":90.0,"Spelunky":90.0}
     """
@@ -264,7 +267,7 @@ def metascore(year:str):
     if not metascores_dict:
         return {"error": f"No se encontraron metascores válidos para el año {year}"}
 
-    # Organizamos en orden descendiente
+    # Organizamos en orden descendente
     metascores_dict_sorted = dict(sorted(metascores_dict.items(), key=lambda item: item[1], reverse=True))
 
     # Limitamos el diccionario al top 5
@@ -279,11 +282,11 @@ def prediccion(
     release_date: str = Query(),
     developer: str =  Query(),
     genre: str = Query()):
-    """ Se ingresa fecha de lanzamiento (release_date) en formato YYYY-MM-DD, el estudio desarrollador (developer) y el/los género(s) (genre) del juego como cadenas de texto
-    de la misma manera que aparecen en Steam. Para el género ingresamos valores separados por comas. Retorna el precio predicho para el juego y el RMSE (Root Mean Squared Error)
-    del modelo de Machine Learning usado.
+    """ Se ingresa fecha de lanzamiento (release_date) en formato YYYY-MM-DD; el estudio desarrollador (developer) y el/los género(s) (genre) del juego como cadenas de texto
+    de la misma manera que aparecen en Steam. Para el género se ingresan separados por comas. Retorna el precio predicho para el juego y el RMSE (Root Mean Squared Error)
+    del modelo de Machine Learning usado, o un mensaje de error en caso que el input sea incorrecto.
 
-    Ejemplo de retorno: {"prediccion_precio": "21.41276006400585", "RMSE_Modelo_Lineal_Polinomial": "6.43"}
+    Ejemplo de retorno: {"prediccion_precio": 21.41, "RMSE_Modelo_Regresion_Lineal": 6.43}
     """
 
     # Validamos la fecha
@@ -357,5 +360,6 @@ def prediccion(
         rmse_retrieved = file.read()
 
     # Retornamos la predicción y el RMSE del modelo
-    return {"prediccion_precio": f"{round(prediccion[0], 2)}", "RMSE_modelo_Lineal_Polinomial": f"{round(float(rmse_retrieved), 2)}"}
+    return {"prediccion_precio": {round(prediccion[0], 2)}, "RMSE_modelo_Regresion_Lineal": {round(float(rmse_retrieved), 2)}}
+
 
