@@ -70,7 +70,7 @@ Nuevamente, el detalle de este proceso puede seguirse paso a paso en [eda.ipynb]
 * Ensamble: Stacking con 3 modelos de mejor performance
 
 ***Pasos***<br>
-Detalle completo en [enxperimentacion_entrenamiento.ipynb](/entregables/experimentacion_entrenamiento.ipynb)
+Detalle completo en [experimentacion_entrenamiento.ipynb](/entregables/experimentacion_entrenamiento.ipynb)
 + Usando como origen el archivo generado en la etapa EDA, definimos X e y, dividimos en sets de test y train, y escalamos los datos.
 + Por cada Modelo:
     + Pre procesamiento adicional en caso de ser necesario (poly features)
