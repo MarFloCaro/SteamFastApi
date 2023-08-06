@@ -83,6 +83,7 @@ Detalle completo en [experimentacion_entrenamiento.ipynb](/entregables/experimen
     + Aplicación de técnicas de curva de aprendizaje para varios modelos que permiten hiperparámetros (algunos fueron muy exigentes en procesamiento y no fue posible)
 
 ### 2. Pruebas de predicciones y procesamiento de input
+<hr>
 
 * Simulamos input de usuario de nuestra función API de predicción.
 * Realizamos cálculos para campos calculados.
