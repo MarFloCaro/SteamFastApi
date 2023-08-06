@@ -359,7 +359,10 @@ def prediccion(
     with open('rmse_model.txt', 'r') as file:
         rmse_retrieved = file.read()
 
+    precio = round(prediccion[0], 2)
+    RMSE = round(float(rmse_retrieved), 2)
+
     # Retornamos la predicción y el RMSE del modelo
-    return {"prediccion_precio": {round(prediccion[0], 2)}, "RMSE_modelo_Regresion_Lineal": {round(float(rmse_retrieved), 2)}}
+    return {"prediccion_precio": {precio}, "RMSE_modelo_Regresion_Lineal": {RMSE}}
 
 
