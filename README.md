@@ -5,7 +5,7 @@
 # <h1 align=center>**<span style="color:plum">Machine Learning Operations (MLOps)</span>**</h1>
 
 
-![MLOPs](src\MLOPs-Purple.png)
+![MLOPs](/src/MLOPs-Purple.png)
 
 ### Este primer proyecto individual nos hará recorrer el ciclo de Machine Learning Operations, partiendo de un dataset de juegos de la plataforma Steam, hasta llegar a un modelo de Machine Learning predictivo.
 <br>
