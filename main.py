@@ -363,6 +363,6 @@ def prediccion(
     RMSE = round(float(rmse_retrieved), 2)
 
     # Retornamos la predicción y el RMSE del modelo
-    return {"prediccion_precio": {precio}, "RMSE_modelo_Regresion_Lineal": {RMSE}}
+    return {"prediccion_precio": precio, "RMSE_modelo_Regresion_Lineal": RMSE}
 
 
