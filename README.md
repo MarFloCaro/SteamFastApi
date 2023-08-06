@@ -97,7 +97,7 @@ Detalle completo en [experimentacion_entrenamiento.ipynb](/entregables/experimen
 
 ## Desarrollo de la aplicación de FAST API
 
-### La misma consta de 1 ruta raíz, 3 funciones de validación de datos, 6 rutas de consulta de datos del dataset (endpoints), más la ruta de predicción de precio de juegos usando el modelo de Machine Learning, todas con suis respectivos doctrings
+### La misma consta de 1 ruta raíz, 3 funciones de validación de datos, 6 rutas de consulta de datos del dataset (endpoints), más la ruta de predicción de precio de juegos usando el modelo de Machine Learning.
 
 ```Python
 def validar_fecha(release_date):
