@@ -28,7 +28,7 @@ La aplicación se encuentra disponible en [la siguiente ubicación](https://stea
 
 El video demostrando el funcionamiento de la aplicación se encuentra en [este link]()
 
-## Índice de Archivos
+## Índice de Archivos del Repo
 
 ### Carpeta Entregables
 + [ETL Jupyter Notebook](/entregables/etl.ipynb)
