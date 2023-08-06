@@ -28,11 +28,14 @@ La aplicación se encuentra disponible en [la siguiente ubicación](https://stea
 
 El video demostrando el funcionamiento de la aplicación se encuentra en [este link]()
 
-## Índice de Archivos del Repositorio (por orden de aparición)
+## Índice de Archivos
 
-+ [ETL Jupyter Notebook](etl.ipynb)
-+ [EDA Jupyter Notebook](eda.ipynb)
-+ [Experimentacion y Entrenamiento Jupyter Notebook](experimentacion_entrenamiento.ipynb)
+### Carpeta Entregables
++ [ETL Jupyter Notebook](/entregables/etl.ipynb)
++ [EDA Jupyter Notebook](/entregables/eda.ipynb)
++ [Experimentacion y Entrenamiento Jupyter Notebook](entregables/experimentacion_entrenamiento.ipynb)
+
+### Raíz del Repo (archivos de la app)
 + [Archivo Main de la app FAST API](main.py)
 + [Archivo Pickle con el pre procesamiento del Modelo](preprocessing_steps.pkl)
 + [Requerimientos de la app FAST API](requirements.txt)
