@@ -192,7 +192,7 @@ La aplicación se encuentra disponible en [la siguiente ubicación](https://stea
 
 ## Video
 
-[![Mirar el Video](https://img.youtube.com/vi/NoPQ7eE4Sy4/maxresdefault.jpg)](https://youtu.be/NoPQ7eE4Sy4)
+[![Mirar el Video](src/thumbnail.jpg)](https://youtu.be/NoPQ7eE4Sy4)
 
 ## Índice de Archivos del Repo
 
